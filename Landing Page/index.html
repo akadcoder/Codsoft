@@ -12,9 +12,14 @@
     <header class="header">
         <div class="container">
             <div class="logo">
-                <h2>Akad<span>Coder</span></h2>
+                <h2>Aka<span>Dcoder</span></h2>
             </div>
             <nav class="nav">
+                <div class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
                 <ul class="nav-list">
                     <li><a href="#home">Home</a></li>
                     <li><a href="#about">About</a></li>
@@ -287,5 +292,24 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const navList = document.querySelector('.nav-list');
+
+        mobileMenuToggle.addEventListener('click', function() {
+            navList.classList.toggle('active');
+            mobileMenuToggle.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-list a').forEach(link => {
+            link.addEventListener('click', () => {
+                navList.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+            });
+        });
+    </script>
 </body>
 </html>
