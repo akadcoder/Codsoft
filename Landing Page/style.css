@@ -11,6 +11,7 @@ body {
     color: #1a1a1a;
     background-color: #f0f4f8;
     overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
 }
 
 .container {
@@ -53,6 +54,7 @@ body {
     flex-direction: column;
     cursor: pointer;
     padding: 5px;
+    z-index: 1001;
 }
 
 .mobile-menu-toggle span {
@@ -127,6 +129,7 @@ body {
         radial-gradient(circle at 80% 20%, rgba(96, 165, 250, 0.3) 0%, transparent 50%),
         radial-gradient(circle at 40% 80%, rgba(96, 165, 250, 0.2) 0%, transparent 50%);
     z-index: -1;
+    will-change: transform;
 }
 
 .hero-content {
@@ -147,6 +150,7 @@ body {
 
 .highlight {
     color: #60a5fa;
+    position: relative;
 }
 
 .highlight::after {
@@ -180,6 +184,10 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     min-width: 150px;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .btn-primary {
@@ -219,6 +227,7 @@ body {
     text-align: center;
     transition: all 0.3s ease;
     max-width: 180px;
+    will-change: transform;
 }
 
 .floating-card:hover {
@@ -482,13 +491,16 @@ body {
     position: relative;
     overflow: hidden;
     border-radius: 10px 10px 0 0;
+    width: 100%;
 }
 
 .project-thumbnail {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
     transition: transform 0.3s ease;
+    display: block;
 }
 
 .portfolio-item:hover .project-thumbnail {
@@ -566,6 +578,10 @@ body {
     flex: 1;
     text-align: center;
     min-width: 100px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .project-link:hover {
@@ -622,6 +638,7 @@ body {
     background: #e0e7ff;
     border-radius: 10px;
     flex-wrap: wrap;
+    min-height: 60px;
 }
 
 .contact-icon {
@@ -653,9 +670,10 @@ body {
     padding: 15px;
     border: 2px solid #cbd5e1;
     border-radius: 10px;
-    font-size: 1rem;
+    font-size: 16px;
     transition: border-color 0.3s ease;
     font-family: 'Poppins', sans-serif;
+    min-height: 48px;
 }
 
 .form-group input:focus,
@@ -731,6 +749,15 @@ body {
     font-size: 0.9rem;
 }
 
+/* Optimize animations for mobile */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
 /* Enhanced Responsive Design */
 @media (max-width: 1024px) {
     .container {
@@ -753,20 +780,21 @@ body {
     
     .nav-list {
         position: fixed;
-        top: 100%;
+        top: 70px;
         left: 0;
         width: 100%;
         background: #124a97;
         flex-direction: column;
         gap: 0;
         padding: 2rem 0;
-        transform: translateX(-100%);
+        transform: translateY(-100%);
         transition: transform 0.3s ease;
         box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        z-index: 1000;
     }
     
     .nav-list.active {
-        transform: translateX(0);
+        transform: translateY(0);
     }
     
     .nav-list li {
@@ -776,9 +804,12 @@ body {
     }
     
     .nav-list a {
-        display: block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         padding: 1rem 2rem;
         font-size: 1.1rem;
+        min-height: 48px;
     }
     
     .hero {
@@ -800,18 +831,31 @@ body {
     
     .hero-image {
         order: 2;
-        height: 300px;
-        margin-top: 2rem;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        height: auto;
+        padding: 2rem 0;
     }
     
     .hero-buttons {
         justify-content: center;
     }
     
+    .btn-primary, .btn-secondary {
+        min-height: 48px;
+        padding: 15px 30px;
+        font-size: 1rem;
+    }
+    
     .floating-card {
-        position: relative;
-        margin: 1rem auto;
-        max-width: 200px;
+        position: static;
+        margin: 0;
+        flex: 1;
+        min-width: 150px;
+        max-width: 180px;
         animation: none;
     }
     
@@ -826,10 +870,14 @@ body {
         margin: 0.5rem;
     }
     
-    .services-grid,
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
     .portfolio-grid {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
+        gap: 2rem;
     }
     
     .footer-content,
@@ -842,10 +890,31 @@ body {
         flex-direction: column;
     }
     
+    .project-link {
+        min-height: 44px;
+        padding: 12px 20px;
+    }
+    
     .contact-item {
         flex-direction: column;
         text-align: center;
         gap: 0.5rem;
+        padding: 1.5rem;
+    }
+    
+    .hero-text h1 {
+        font-size: clamp(1.8rem, 7vw, 2.5rem);
+        line-height: 1.2;
+    }
+    
+    .hero-text p {
+        font-size: clamp(0.95rem, 4vw, 1.1rem);
+        line-height: 1.6;
+    }
+    
+    .section-header h2 {
+        font-size: clamp(1.8rem, 6vw, 2.2rem);
+        line-height: 1.3;
     }
 }
 
@@ -866,10 +935,16 @@ body {
         padding: 80px 0 40px;
     }
     
+    .hero-image {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
     .floating-card {
+        width: 100%;
+        max-width: 250px;
         padding: 1rem;
         margin: 0.5rem;
-        max-width: 150px;
     }
     
     .floating-card h4 {
@@ -919,7 +994,7 @@ body {
     }
     
     .floating-card {
-        max-width: 120px;
+        max-width: 200px;
         padding: 0.8rem;
     }
     
@@ -928,7 +1003,7 @@ body {
     }
     
     .hero-image {
-        height: 200px;
+        padding: 1rem 0;
     }
 }
 
@@ -946,8 +1021,9 @@ a:focus {
     outline-offset: 2px;
 }
 
-/* Loading optimization */
+/* Better image handling */
 img {
     max-width: 100%;
     height: auto;
+    display: block;
 }
