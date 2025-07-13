@@ -158,7 +158,6 @@ body {
 
 .highlight {
     color: #60a5fa;
-    position: relative;
 }
 
 .highlight::after {
