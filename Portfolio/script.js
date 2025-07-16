@@ -7,11 +7,10 @@ if (hamburger && navMenu) {
         hamburger.classList.toggle('active');
         navMenu.classList.toggle('active');
         
-        // Prevent body scroll when menu is open
+       
         document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
     });
 
-    // Close mobile menu when clicking on a link
     document.querySelectorAll('.nav-menu a').forEach(link => {
         link.addEventListener('click', () => {
             hamburger.classList.remove('active');
@@ -20,7 +19,6 @@ if (hamburger && navMenu) {
         });
     });
 
-    // Close menu when clicking outside
     document.addEventListener('click', (e) => {
         if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
             hamburger.classList.remove('active');
@@ -30,7 +28,6 @@ if (hamburger && navMenu) {
     });
 }
 
-// Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -50,16 +47,8 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // Navbar scroll effect
 window.addEventListener('scroll', () => {
     const navbar = document.querySelector('.navbar');
-    if (navbar) {
-        if (window.scrollY > 100) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-    }
-});
+}
 
-// Scroll animations
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
@@ -73,24 +62,20 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observe all sections for scroll animations
 document.querySelectorAll('section').forEach(section => {
     section.classList.add('fade-in');
     observer.observe(section);
 });
 
-// Contact form submission
 const contactForm = document.querySelector('.contact-form');
 if (contactForm) {
     contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
-        // Get form data
         const formData = new FormData(this);
         const inputs = this.querySelectorAll('input, textarea');
         let isValid = true;
         
-        // Simple validation
         inputs.forEach(input => {
             if (input.hasAttribute('required') && !input.value.trim()) {
                 isValid = false;
@@ -105,28 +90,23 @@ if (contactForm) {
             return;
         }
         
-        // Email validation
         const email = formData.get('email') || this.querySelector('input[type="email"]')?.value;
         if (email && !isValidEmail(email)) {
             alert('Please enter a valid email address');
             return;
         }
         
-        // Show success message
         alert('Thank you for your message! I will get back to you soon.');
         
-        // Reset form
         this.reset();
     });
 }
 
-// Email validation helper
 function isValidEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
 }
 
-// Add loading animation for images
 document.addEventListener('DOMContentLoaded', function() {
     const images = document.querySelectorAll('img');
     
@@ -142,7 +122,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Smooth reveal animation for cards
 const cards = document.querySelectorAll('.project-card, .service-card, .skill-category, .contact-item');
 
 const cardObserver = new IntersectionObserver((entries) => {
@@ -165,15 +144,15 @@ cards.forEach(card => {
     cardObserver.observe(card);
 });
 
-// Resume download tracking (optional analytics)
+
 document.querySelectorAll('.download-btn, .resume-download-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-        // You can add analytics tracking here
+        
         console.log('Resume downloaded');
     });
 });
 
-// Add smooth hover effects for buttons
+
 document.querySelectorAll('.btn').forEach(btn => {
     btn.addEventListener('mouseenter', function() {
         this.style.transform = 'translateY(-2px)';
@@ -184,7 +163,6 @@ document.querySelectorAll('.btn').forEach(btn => {
     });
 });
 
-// Performance optimization: Debounce scroll events
 function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -197,7 +175,6 @@ function debounce(func, wait) {
     };
 }
 
-// Apply debouncing to scroll events
 const debouncedScrollHandler = debounce(() => {
     const navbar = document.querySelector('.navbar');
     if (navbar) {
