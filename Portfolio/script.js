@@ -1,4 +1,4 @@
-// Mobile Navigation
+
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 
@@ -7,7 +7,6 @@ if (hamburger && navMenu) {
         hamburger.classList.toggle('active');
         navMenu.classList.toggle('active');
         
-       
         document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
     });
 
@@ -44,10 +43,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Navbar scroll effect
-window.addEventListener('scroll', () => {
-    const navbar = document.querySelector('.navbar');
-});
 
 const observerOptions = {
     threshold: 0.1,
@@ -144,14 +139,11 @@ cards.forEach(card => {
     cardObserver.observe(card);
 });
 
-
 document.querySelectorAll('.download-btn, .resume-download-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-        
         console.log('Resume downloaded');
     });
 });
-
 
 document.querySelectorAll('.btn').forEach(btn => {
     btn.addEventListener('mouseenter', function() {
@@ -174,16 +166,3 @@ function debounce(func, wait) {
         timeout = setTimeout(later, wait);
     };
 }
-
-const debouncedScrollHandler = debounce(() => {
-    const navbar = document.querySelector('.navbar');
-    if (navbar) {
-        if (window.scrollY > 100) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-    }
-}, 10);
-
-window.addEventListener('scroll', debouncedScrollHandler);
